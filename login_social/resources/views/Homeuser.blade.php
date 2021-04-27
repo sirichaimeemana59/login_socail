@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
-</head>
-<body class="antialiased">
-<form method="POST" action="{{ route('login') }}">
-    @csrf
-</form>
-</body>
-</html>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">ข้อมูลผู้ใช้งาน</div>
+                    <div class="card-body">
+                            <div>
+                                <x-jet-label for="name" value="Name" /> : {!! $user['name'] !!} <br>
+                                <x-jet-label for="email" value="Email" /> : {!! $user['email'] !!} <br>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
