@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('auth/facebook','LoginSocialController@facebookRedirect');
+
 Route::get('/', function () {
-    return view('welcome');
+   return view('home');
 });
+
+Route::get('auth/facebook/callback','LoginSocialController@loginWithFacebook');
+
