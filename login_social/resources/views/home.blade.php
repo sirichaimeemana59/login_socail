@@ -9,11 +9,6 @@
 <body class="antialiased">
 <form method="POST" action="{{ route('login') }}">
     @csrf
-    @if (session('status'))
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ session('status') }}
-        </div>
-    @endif
     <div>
         <x-jet-label for="email" value="{{ __('Email') }}" />
         <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"

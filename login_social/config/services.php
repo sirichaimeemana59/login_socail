@@ -2,18 +2,6 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Third Party Services
-    |--------------------------------------------------------------------------
-    |
-    | This file is for storing the credentials for third party services such
-    | as Mailgun, Postmark, AWS and more. This file provides the de facto
-    | location for this type of information, allowing packages to have
-    | a conventional file to locate the various service credentials.
-    |
-    */
-
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
@@ -32,6 +20,6 @@ return [
     'facebook' => [
         'client_id' => '4427296107300556',
         'client_secret' => '456d8ee8ab78d49a47acf02c220f4381',
-        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback/',
     ],
 ];

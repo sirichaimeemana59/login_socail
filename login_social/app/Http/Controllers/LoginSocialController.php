@@ -11,36 +11,35 @@ use Auth;
 
 class LoginSocialController extends Controller
 {
-    public function facebookRedirect()
+    public function facebookRedirect($provider = 'facebook')
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function loginWithFacebook()
+    public function loginWithFacebook($provider = 'facebook')
     {
-        try {//testloginMM2021@gmail.com
+        $providerUser = Socialite::driver($provider)->stateless()->user();
+    
+          $user = new  User();
+          $user->name = $providerUser->getName();
+          $user->email = $providerUser->getEmail();
+          $user->password = md5(rand(1,10000));
+          $user->fb_id = $providerUser->getId();
+          $user->save();
+        auth()->login($user);
+        $_SESSION["user"] = $user;
 
-            $user = Socialite::driver('facebook')->user();
-            $isUser = User::where('fb_id', $user->id)->first();
-
-            if($isUser){
-                Auth::login($isUser);
-                return redirect('/');
-            }else{
-                $createUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'fb_id' => $user->id,
-                    'password' => encrypt('admin@123')
-                ]);
-
-                Auth::login($createUser);
-                return redirect('/');
-            }
-
-        } catch (Exception $exception) {
-            dd($exception->getMessage());
-        }
+       return redirect()->to('/homeUser');
+        //return redirect('/homeUser');
+        
     }
+
+    public function home()
+    {
+       // dd('aa');
+        return view('Homeuser');
+        
+    }
+
 
 }
