@@ -19,6 +19,8 @@ class LoginGoogleControler extends Controller
         try{
             $providerUser = Socialite::driver($provider)->stateless()->user();
 
+            //dd($providerUser);
+
             $user = User::where('google_id','=',$providerUser->getId());
             $user = $user->get();
 
@@ -28,6 +30,7 @@ class LoginGoogleControler extends Controller
                 $user_save->email = $providerUser->getEmail();
                 $user_save->password = md5(rand(1, 10000));
                 $user_save->google_id = $providerUser->getId();
+                $user_save->photo = $providerUser->getAvatar();
                 $user_save->save();
 
                 $user = User::where('google_id','=',$providerUser->getId());

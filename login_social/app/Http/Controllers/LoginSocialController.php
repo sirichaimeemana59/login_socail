@@ -18,8 +18,11 @@ class LoginSocialController extends Controller
 
     public function loginWithFacebook($provider = 'facebook')
     {
+
         try{
         $providerUser = Socialite::driver($provider)->stateless()->user();
+
+           //dd($providerUser);
 
         $user = User::where('fb_id','=',$providerUser->getId());
         $user = $user->get();
@@ -31,6 +34,9 @@ class LoginSocialController extends Controller
             $user_save->email = $providerUser->getEmail();
             $user_save->password = md5(rand(1,10000));
             $user_save->fb_id = $providerUser->getId();
+            $user_save->photo = $providerUser->getAvatar();
+
+            //dd($user_save);
             $user_save->save();
 
             $user = User::where('fb_id','=',$providerUser->getId());

@@ -21,6 +21,7 @@
                     <div class="card-body">
                         @foreach($user as $item)
                             <div>
+                                <img src="{!! $item->photo !!}" alt="" width="250" height="250"><br><br>
                                 <x-jet-label for="name" value="Name" /> : {!! $item->name !!} <br>
                                 <x-jet-label for="email" value="Email" /> : {!! $item->email !!} <br>
                             </div>
